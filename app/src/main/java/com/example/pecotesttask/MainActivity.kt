@@ -3,7 +3,9 @@ package com.example.pecotesttask
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -76,8 +78,33 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
+        //Notification
+      //  if (intent?.action == "NOTIFICATION_CLICK") {
+            // Extract the fragment number from the intent
+     //       val fragmentNumber = intent.getIntExtra("fragmentNumber", 0)
+            // Navigate to the corresponding fragment
+     //       navigateToFragment(fragmentNumber)
+     //   }
+
+
+
     }
 
+
+    //Notification
+    private fun navigateToFragment(fragmentNumber: Int) {
+        // Find the fragment by tag
+        val fragmentTag = "fragment_$fragmentNumber"
+        val fragment = supportFragmentManager.findFragmentByTag(fragmentTag)
+        // If the fragment is found, navigate to it
+        if (fragment != null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.upper_fragment_container, fragment)
+                .commit()
+        }
+    }
+    //Notification
 
 
     override fun onStop() {
@@ -209,6 +236,20 @@ class PageFragment : Fragment() {
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .build()
         notificationManager.notify(fragmentNumber, notification)
+
+        //Notification
+        // Create an Intent to launch MainActivity
+      //  val intent = Intent(context, MainActivity::class.java)
+        // Add the fragment number as an extra to the intent
+      //  intent.putExtra("fragmentNumber", fragmentNumber)
+        // Set the intent action to indicate that it comes from a notification click
+      //  intent.action = "NOTIFICATION_CLICK"
+
+        // Create a PendingIntent
+      //  val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        //Notification
+
     }
 }
 
